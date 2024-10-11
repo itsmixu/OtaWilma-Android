@@ -35,26 +35,23 @@ fun HomeScreen(paddingValues: PaddingValues){
             modifier = Modifier
                 .padding(top = paddingValues.calculateTopPadding())
                 .fillMaxWidth()
-                .height(120.dp)
+                .height(140.dp)
                 .background(color = MaterialTheme.colorScheme.onPrimary),
             contentAlignment = Alignment.Center
         ){
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-
+            Column(
+                modifier = Modifier.padding(4.dp),
             ) {
                 Image(
                     painter = painterResource(R.drawable.baseline_person_24),
                     contentDescription = "Your profile photo",
-                    modifier = Modifier.size(100.dp),
+                    modifier = Modifier.size(100.dp)
                 )
                 Text(
                     text = "Student Name",
                     fontSize = 16.sp,
-
                 )
             }
-
         }
     }
 }

@@ -59,7 +59,7 @@ fun LogInScreen(){
         )
         Text(
             text = "Welcome to OtaWilma",
-            fontSize = 20.sp
+            fontSize = 22.sp
         )
         Spacer(
             modifier = Modifier.height(20.dp)
