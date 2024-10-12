@@ -2,17 +2,15 @@ package com.example.otawilmamobile
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,24 +22,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
-@Preview
 @Composable
 fun LogInScreen(){
 
-    var name by remember {
-        mutableStateOf("")
-    }
-    var password by remember {
-        mutableStateOf("")
-    }
+    var studentName by remember { mutableStateOf("") }
+    var studentClass by remember { mutableStateOf("") }
+
+
+    // Temporary variables to hold input
+    var nameInput by remember { mutableStateOf("") }
+    var classInput by remember { mutableStateOf("") }
 
     val context = LocalContext.current
 
@@ -57,39 +53,58 @@ fun LogInScreen(){
             contentDescription = "OtaWilma logo",
             modifier = Modifier.size(200.dp)
         )
+        if (studentName.isNotBlank()){
+            Text(
+                text = "Welcome, $studentName to OtaWilma.",
+                fontSize = 22.sp
+            )
+        }
+        else{
+            Text(
+                text = "Welcome to OtaWilma",
+                fontSize = 22.sp
+            )
+        }
+
         Text(
-            text = "Welcome to OtaWilma",
-            fontSize = 22.sp
+            text = "Log in below with your Wilma account.",
+            fontSize = 18.sp
         )
+
         Spacer(
             modifier = Modifier.height(20.dp)
         )
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            placeholder = {
-                Text(text = "Username", color = Color.Gray)
-            }
-        )
+        Row(modifier = Modifier.padding(12.dp)){
+            OutlinedTextField(
+                value = nameInput,
+                onValueChange = { nameInput = it },
+                placeholder = {
+                    Text(text = "Enter your name", color = Color.Gray)
+                },
+                modifier = Modifier.weight(1f)
+            )
+            Spacer(modifier = Modifier.size(8.dp))
+            OutlinedTextField(
+                value = classInput,
+                onValueChange = { classInput = it },
+                placeholder = {
+                    Text(text = "Class", color = Color.Gray)
+                },
+                modifier = Modifier.weight(0.6f)
+            )
+        }
+
         Spacer(
-            modifier = Modifier.height(10.dp)
-        )
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            placeholder = {
-                Text(text = "Password", color = Color.Gray)
-            }
-        )
-        Spacer(
-            modifier = Modifier.height(25.dp)
+            modifier = Modifier.height(18.dp)
         )
         Button(
             onClick = {
-                Toast.makeText(context,"Logging in not implemented yet :p", Toast.LENGTH_SHORT).show()
+                studentName = nameInput
+                studentClass = classInput
+                Toast.makeText(context,"Hello $studentName!", Toast.LENGTH_SHORT).show()
             }
         ){
-            Text(text = "Log In")
+            Text(text = "Save")
         }
     }
 }
